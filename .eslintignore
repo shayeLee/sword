@@ -1,0 +1,9 @@
+.babelrc
+.eslintrc.json
+.gitignore
+.npmignore
+gulpfile.js
+jest.config.js
+jsdoc.config.json
+package-lock.json
+package.json

@@ -18,3 +18,6 @@ export const objTool = _objTool;
 
 import _fileTool from "./fileTool";
 export const fileTool = _fileTool;
+
+import _domTool from "./domTool";
+export const domTool = _domTool;

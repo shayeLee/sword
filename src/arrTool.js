@@ -25,4 +25,5 @@ const arrTool = {
     return subjectCodeArr;
   }
 }
+
 export default arrTool;

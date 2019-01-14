@@ -74,7 +74,7 @@ gulp.task("rollup-pro", function(cb) {
 	return rollup.rollup(rollupConfig).then(bundle => {
 		return bundle.write({
 			file: dest.main,
-			format: "cjs",
+			format: "es",
 			name: "sword"
 		});
 	});

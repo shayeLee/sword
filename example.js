@@ -1,3 +1,5 @@
-import { dateTool, variables, arrTool, strTool, objTool, fileTool, crypto } from "./src/index.js";
+import { dateTool, variables, arrTool, strTool, objTool, domTool, fileTool, crypto } from "./src/index.js";
 
-console.log(crypto.generateUploadParams({ name: "img1.png" }, "LTAIxzwlIaHSos8G", "E95TlCX4bagdv8aszpgcSsRQitztXe"));
+window.onload = function () {
+    console.log(domTool.getElementLeft(document.getElementById("myDom"), document.documentElement));
+}

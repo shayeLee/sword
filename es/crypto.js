@@ -1,11 +1,8 @@
-/**
- * @namespace crypto
- */
-
-import base64 from "crypto-js/enc-base64";
-import md5 from "crypto-js/md5";
-import utf8 from "crypto-js/enc-utf8";
-import hmacSHA1 from "crypto-js/hmac-sha1";
+import 'core-js/modules/es6.function.name';
+import base64 from 'crypto-js/enc-base64';
+import md5 from 'crypto-js/md5';
+import utf8 from 'crypto-js/enc-utf8';
+import hmacSHA1 from 'crypto-js/hmac-sha1';
 
 /**
  * 生成指定长度的随机码
@@ -14,26 +11,26 @@ import hmacSHA1 from "crypto-js/hmac-sha1";
  * @param {number} length - 随机码的长度，必须大于零
  * @returns {string}
  */
+
 function randomCode(length) {
   if (length <= 0) return null;
-
   var len = length;
   var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   var maxPos = chars.length;
   var code = "";
+
   for (var i = 0; i < len; i++) {
     code += chars.charAt(Math.floor(Math.random() * maxPos));
   }
+
   return code;
 }
 
 function _generateOSSKey(name) {
-  const time = new Date();
-  const rootPath = `live/tms/${time.getFullYear()}/${time.getMonth() +
-    1}/${time.getDate()}/`;
-  return `${rootPath}${md5(name)}-${name}`;
+  var time = new Date();
+  var rootPath = "live/tms/".concat(time.getFullYear(), "/").concat(time.getMonth() + 1, "/").concat(time.getDate(), "/");
+  return "".concat(rootPath).concat(md5(name), "-").concat(name);
 }
-
 /**
  * 生成OSS文件上传表单参数
  * @memberof crypto
@@ -43,22 +40,20 @@ function _generateOSSKey(name) {
  * @param {string} secret - OSSAccessKeySecret
  * @returns {object}
  */
-function generateUploadParams(file, id, secret) {
-  const policy = base64.stringify(
-    utf8.parse(
-      JSON.stringify({
-        expiration: "2020-01-01T12:00:00.000Z",
-        conditions: [["content-length-range", 0, 41943040]]
-      })
-    )
-  );
 
+
+function generateUploadParams(file, id, secret) {
+  var policy = base64.stringify(utf8.parse(JSON.stringify({
+    expiration: "2020-01-01T12:00:00.000Z",
+    conditions: [["content-length-range", 0, 41943040]]
+  })));
   return {
     key: _generateOSSKey(file.name),
     OSSAccessKeyId: id,
-    policy,
+    policy: policy,
     Signature: base64.stringify(hmacSHA1(policy, secret)),
     success_action_status: "200"
   };
 }
-export { randomCode, generateUploadParams }
+
+export { randomCode, generateUploadParams };

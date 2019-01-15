@@ -1,3 +1,6 @@
+import 'core-js/modules/es6.regexp.split';
+import 'core-js/modules/es6.regexp.to-string';
+
 /**
  * @namespace dateTool
  */
@@ -17,9 +20,8 @@
  * @returns {string} 时间字符串
  */
 function time2str(date, type) {
-  const _date = date;
+  var _date = date;
   if (typeof _date === "number") date = new Date(_date);
-
   var weekdayMap = {
     1: "周一",
     2: "周二",
@@ -29,7 +31,6 @@ function time2str(date, type) {
     6: "周六",
     0: "周天"
   };
-
   var weekday = weekdayMap[date.getDay()];
   var day = date.getDate().toString();
   if (day.length === 1) day = "0" + day;
@@ -57,7 +58,6 @@ function time2str(date, type) {
     return weekday + "(" + mou + "月" + day + "日)";
   }
 }
-
 /**
  * 将时间字符串转换为时间对象
  * @memberOf dateTool
@@ -67,10 +67,14 @@ function time2str(date, type) {
  * e.g. "2017-02-13"
  * e.g. "9:10"
  */
+
+
 function str2time(strTime) {
   // new Date(year, month[, day[, hour[, minutes[, seconds[, milliseconds]]]]]);
   strTime = strTime.trim();
+
   var _type;
+
   if (strTime.indexOf("-") > -1 && strTime.indexOf(":") > -1) {
     _type = "dateTime";
   } else if (strTime.indexOf("-") > -1 && strTime.indexOf(":") < 0) {
@@ -93,19 +97,16 @@ function str2time(strTime) {
 
   if (_type === "dateTime") {
     arr = strTime.split(" ");
-
     date = arr[0];
     dateArr = date.split("-");
     year = dateArr[0];
     month = dateArr[1];
     day = dateArr[2];
-
     time = arr[1];
     timeArr = time.split(":");
     hour = timeArr[0];
     minutes = timeArr[1];
     seconds = timeArr.length > 2 ? timeArr[2] : 0;
-
     return new Date(year, month - 1, day, hour, minutes, seconds);
   } else if (_type === "date") {
     date = strTime;
@@ -113,21 +114,19 @@ function str2time(strTime) {
     year = dateArr[0];
     month = dateArr[1];
     day = dateArr[2];
-
     return new Date(year, month - 1, day);
   } else if (_type === "time") {
     date = new Date();
     year = date.getFullYear();
     month = date.getMonth();
     day = date.getDate();
-
     time = strTime;
     timeArr = time.split(":");
     hour = timeArr[0];
     minutes = timeArr[1];
     seconds = timeArr.length > 2 ? timeArr[2] : 0;
-
     return new Date(year, month - 1, day, hour, minutes, seconds);
   }
 }
-export { time2str, str2time }
+
+export { time2str, str2time };

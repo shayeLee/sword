@@ -1,8 +1,5 @@
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (factory());
-}(this, (function () { 'use strict';
+(function () {
+  'use strict';
 
   var _isObject = function (it) {
     return typeof it === 'object' ? it !== null : typeof it === 'function';
@@ -1580,5 +1577,5 @@
 
   console.log(randomCode);
 
-})));
-//# sourceMappingURL=sword.umd.js.map
+}());
+//# sourceMappingURL=example.js.map

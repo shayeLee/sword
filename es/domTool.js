@@ -11,9 +11,10 @@
  * @returns {number} elementTop
  */
 function getElementTop(element, target) {
-  let actualTop = element.offsetTop;
-  let current = element.offsetParent;
-  const _target = target ? target : document.documentElement;
+  var actualTop = element.offsetTop;
+  var current = element.offsetParent;
+
+  var _target = target ? target : document.documentElement;
 
   while (!(current === null || current === _target)) {
     actualTop += current.offsetTop;
@@ -22,7 +23,6 @@ function getElementTop(element, target) {
 
   return actualTop;
 }
-
 /**
  * 获取dom元素距离指定定位父元素左边的宽度
  * @memberof domTool
@@ -31,10 +31,13 @@ function getElementTop(element, target) {
  * @param {element} [target=document.documentElement] - 指定定位父元素，默认为document.documentElement
  * @returns {number} elementLeft
  */
+
+
 function getElementLeft(element, target) {
-  let actualLeft = element.offsetLeft;
-  let current = element.offsetParent;
-  const _target = target ? target : document.documentElement;
+  var actualLeft = element.offsetLeft;
+  var current = element.offsetParent;
+
+  var _target = target ? target : document.documentElement;
 
   while (!(current === null || current === _target)) {
     actualLeft += current.offsetLeft;
@@ -44,4 +47,4 @@ function getElementLeft(element, target) {
   return actualLeft;
 }
 
-export { getElementTop, getElementLeft }
+export { getElementTop, getElementLeft };

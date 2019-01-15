@@ -1,10 +1,10 @@
 {
-  "name": "@shaye/sword",
-  "version": "1.0.2",
+  "name": "shaye-sword",
+  "version": "1.0.4",
   "description": "a javascript tool library",
-  "main": "src/index.js",
+  "module": "es/index.js",
   "scripts": {
-    "test": "jest ./__tests__ --config ./jest.config.js --watch --onlyChanged",
+    "build": "rollup -c ./build/rollup.config.js",
     "doc": "jsdoc -c ./jsdoc.config.json"
   },
   "keywords": [

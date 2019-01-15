@@ -11,16 +11,18 @@
  */
 function enumFlagsThrustReverser(sum) {
   if (sum === 1) return [1];
-
   var code = 1;
   var subjectCodeArr = [];
+
   while (code <= sum) {
     if ((code & sum) === code) {
       subjectCodeArr.push(code);
     }
+
     code *= 2;
   }
 
   return subjectCodeArr;
-};
-export { enumFlagsThrustReverser }
+}
+
+export { enumFlagsThrustReverser };

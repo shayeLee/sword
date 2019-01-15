@@ -1,3 +1,5 @@
+import 'core-js/modules/es6.promise';
+
 /**
  * @namespace fileTool
  */
@@ -9,12 +11,13 @@
  * @returns {promise}
  */
 function getImgBase64(img) {
-  return new Promise(resolve => {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
+  return new Promise(function (resolve) {
+    var reader = new FileReader();
+    reader.addEventListener("load", function () {
       resolve(reader.result);
     });
     reader.readAsDataURL(img);
   });
 }
-export { getImgBase64 }
+
+export { getImgBase64 };

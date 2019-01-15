@@ -1,3 +1,7 @@
+import 'core-js/modules/web.dom.iterable';
+import 'core-js/modules/es6.regexp.split';
+import 'core-js/modules/es6.regexp.to-string';
+
 /**
  * @namespace variables
  */
@@ -11,29 +15,21 @@
 function isObject(obj) {
   return Object.prototype.toString.call(obj) === "[object Object]";
 }
-
 /**
  * 判断object是否是空的
  * @memberOf variables
  * @function isEmptyObject
  * @param {object} obj
  */
+
+
 function isEmptyObject(obj) {
   for (var key in obj) {
     return false;
   }
+
   return true;
 }
-
-/**
- * 判断函数是否是Promise对象
- * @memberOf variables
- * @param {function} fn - 被判断的函数
- */
-function isPromise(fn) {
-  return isCorrect(fn) && typeof fn.then === "function";
-}
-
 /**
  * 检验变量是否有正确的值
  * @memberOf variables
@@ -41,21 +37,14 @@ function isPromise(fn) {
  * @param {*} variable - 被检验的变量
  * @param {boolean} [notBezero=false] - 是否不允许变量等于零
  */
+
+
 function isCorrect(variable, notBezero) {
   var result = true;
-  if (
-    typeof variable === "string" &&
-    (variable === "" ||
-      variable === "undefined" ||
-      variable === "null" ||
-      variable === "NaN" ||
-      variable === "Infinity")
-  ) {
+
+  if (typeof variable === "string" && (variable === "" || variable === "undefined" || variable === "null" || variable === "NaN" || variable === "Infinity")) {
     result = false;
-  } else if (
-    typeof variable === "number" &&
-    (isNaN(variable) || !isFinite(variable) || (notBezero && variable === 0))
-  ) {
+  } else if (typeof variable === "number" && (isNaN(variable) || !isFinite(variable) || notBezero && variable === 0)) {
     result = false;
   } else if (variable === null) {
     result = false;
@@ -70,28 +59,30 @@ function isCorrect(variable, notBezero) {
       result = false;
     }
   }
+
   return result;
 }
 
 /**
- * array object 深拷贝
- * @memberOf variables
- * @function cloneDeep
- * @param {object|array} target - 被拷贝的对象
+ * 把URL查询参数转换为object
+ * @memberOf strTool
+ * @function query2obj
+ * @param {string} query - url问号后面的查询参数  e.g. ?id=66597&type=2&stuNum=1
+ * @returns {object}
  */
-function cloneDeep(target) {
-  var _isObject = isObject(target);
-  var _isArray = Array.isArray(target);
 
-  if (_isObject || _isArray) {
-    var newObj = {};
-    for (var key in target) {
-      newObj[key] = cloneDeep(target[key]);
-    }
-    return newObj;
-  }
-
-  return target;
+function query2obj(query) {
+  if (!isCorrect(query)) return {};
+  var queryItems = query.slice(1).split("&");
+  var queryMap = {};
+  queryItems.forEach(function (item) {
+    if (!isCorrect(item)) return;
+    var itemArr = item.split("="),
+        key = itemArr[0],
+        value = itemArr[1];
+    queryMap[key] = value;
+  });
+  return queryMap;
 }
 
-export { isObject, isEmptyObject, isPromise, isCorrect, cloneDeep }
+export { query2obj };

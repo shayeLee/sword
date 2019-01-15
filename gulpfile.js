@@ -20,18 +20,19 @@ var watch = {
 	modules: []
 };
 
-var plugins = [
-  json(),
-  replace({
-    "process.env.NODE_ENV": JSON.stringify("production")
-  }),
-  babel({
-    exclude: "node_modules/**"
-  })
-]
-
 var rollupConfig = {
-	plugins: []
+	plugins: [
+    babel({
+			exclude: "node_modules/**"
+		}),
+		nodeResolve({
+			jsnext: true
+		}),
+		commonJs({
+			extensions: [".js"],
+			ignoreGlobal: false
+		})
+  ]
 };
 
 gulp.task("rollup-dev", function() {
@@ -39,17 +40,9 @@ gulp.task("rollup-dev", function() {
   rollupConfig.watch = {
     include: ["./example.js", "src/**/*.js"]
   }
-  rollupConfig.plugins = plugins.concat([
-    nodeResolve(),
-    commonJs({
-      // non-CommonJS modules will be ignored, but you can also
-      // specifically include/exclude files
-      include: "node_modules/**", // Default: undefined
-    })
-  ]);
   rollupConfig.output = [{
-    file: "dist/sword.umd.js",
-    format: "umd",
+    file: "dist/example.js",
+    format: "iife",
     sourcemap: true
   }]
   const watcher = rollup.watch(rollupConfig);
@@ -68,18 +61,6 @@ gulp.task("rollup-dev", function() {
   });
 });
 
-gulp.task("rollup-pro", function(cb) {
-  rollupConfig.input = src.main;
-  rollupConfig.plugins = plugins;
-	return rollup.rollup(rollupConfig).then(bundle => {
-		return bundle.write({
-			file: dest.main,
-			format: "es",
-			name: "sword"
-		});
-	});
-});
-
 //清除
 gulp.task("clean", function(cb) {
 	del.sync("dist/");
@@ -87,4 +68,3 @@ gulp.task("clean", function(cb) {
 });
 
 gulp.task("dev", gulpSequence("clean", "rollup-dev"));
-gulp.task("build", gulpSequence("clean", "rollup-pro"));

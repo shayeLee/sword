@@ -1,23 +1,33 @@
-import _crypto from "./crypto";
-export const crypto = _crypto;
+import { enumFlagsThrustReverser } from "./arrTool";
 
-import _dateTool from "./dateTool";
-export const dateTool = _dateTool;
+import { randomCode, generateUploadParams } from "./crypto";
 
-import _variables from "./variables";
-export const variables = _variables;
+import { time2str, str2time } from "./dateTool";
 
-import _arrTool from "./arrTool";
-export const arrTool = _arrTool;
+import { getElementTop, getElementLeft } from "./domTool";
 
-import _strTool from "./strTool";
-export const strTool = _strTool;
+import { getImgBase64 } from "./fileTool";
 
-import _objTool from "./objTool";
-export const objTool = _objTool;
+import { obj2query } from "./objTool";
 
-import _fileTool from "./fileTool";
-export const fileTool = _fileTool;
+import { query2obj } from "./strTool";
 
-import _domTool from "./domTool";
-export const domTool = _domTool;
+import { isObject, isEmptyObject, isPromise, isCorrect, cloneDeep } from "./variables";
+
+export {
+  enumFlagsThrustReverser,
+  randomCode,
+  generateUploadParams,
+  time2str,
+  str2time,
+  getElementTop,
+  getElementLeft,
+  getImgBase64,
+  obj2query,
+  query2obj,
+  isObject,
+  isEmptyObject,
+  isPromise,
+  isCorrect,
+  cloneDeep
+}

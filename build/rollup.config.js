@@ -53,15 +53,6 @@ const external = function (name) {
 
 export default [
   {
-    input: src.index,
-    output: {
-      file: esDest.index,
-			format: "es"
-    },
-    plugins,
-    external
-  },
-  {
     input: src.arrTool,
     output: {
       file: esDest.arrTool,

@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>strTool - Documentation</title>
+    <title>functional/index.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -31,256 +31,99 @@
 
 <div id="main">
     
-    <h1 class="page-title">strTool</h1>
+    <h1 class="page-title">functional/index.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2>
-        strTool
-        </h2>
-        
-    
-</header>
-
-<article>
-    
-        <div class="container-overview">
-        
-            
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="strTool.js.html">strTool.js</a>, <a href="strTool.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-            
-
-            
-        
-        </div>
-    
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id=".query2obj"><span class="type-signature">(static) </span>query2obj<span class="signature">(query)</span><span class="type-signature"> &rarr; {object}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="strTool.js.html">strTool.js</a>, <a href="strTool.js.html#line7">line 7</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>把URL查询参数转换为object</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>query</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>url问号后面的查询参数  e.g. ?id=66597&amp;type=2&amp;stuNum=1</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-        
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @namespace functional
+ */
+
+import Observable from "./observables/observable";
+
+/**
+ * 将多个函数组合成一个新的函数
+ * @memberof functional
+ * @param {function} functions - 要合成的函数，多个函数用逗号分割（至少两个）
+ * e.g. const composeFunction = compose(fn1, fn2, fn3);
+ * @returns {function} composeFunction
+ */
+function compose() {
+  if (arguments.length &lt; 2) {
+    throw new RangeError("You can't have less than two functions");
+  }
+
+  const _arguments = arguments;
+  return function(x) {
+    let currValue = x;
+    const fnArr = _arguments;
+    const len = _arguments.length;
+    let i = len - 1;
+    for (i; i > 0; i--) {
+      currValue = fnArr[i](currValue);
+    }
+    return fnArr[0](currValue);
+  };
+}
+
+/**
+ * 函数柯里化
+ * @memberof functional
+ * @param {function} fn - 要被柯里化的函数
+ * @returns {function} curriedFunction
+*/
+function curry(fn) {
+  const _argLen = fn.length;
+  let _argArr = [];
+  const handle = function () {
+    const _args = [].slice.call(arguments);
+    if ((_argArr.length + _args.length) === _argLen) {
+      _argArr = _argArr.concat(_args);
+      return fn(..._argArr);
+    } else {
+      _argArr = _argArr.concat(_args);
+      return handle
+    }
+  }
+  return handle;
+}
+
+/**
+ * 将原本的函子转变成新函子
+ * 柯里化 map :: f(a -> b) -> Functor m
+ * @memberof functional
+ * @method map
+ * @param {function} f - 加工函子value的函数
+ * @param {functor} m - 原本的函子
+ * @returns {functor}
+*/
+const map = curry(function(f, m) {
+  return m.map(f);
+});
+
+/**
+ * 取出函子里的值
+ * 柯里化 maybe :: b -> f(a -> b) -> Functor m -> b
+ * @memberof functional
+ * @method maybe
+ * @param {*} x - 如果函子没有正确的值就会提供的默认值
+ * @param {function} f - 取出函子里的数据的函数
+ * @param {functor} m - 函子
+*/
+const maybe = curry(function(x, f, m) {
+  return m.isNothing() ? x : f(m.value);
+});
+
+export { compose, curry, map, maybe, Observable };
+</code></pre>
+        </article>
+    </section>
 
 
 

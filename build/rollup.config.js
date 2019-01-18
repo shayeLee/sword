@@ -16,7 +16,8 @@ const src = {
   fileTool: resolvePath("src/fileTool.js"),
   objTool: resolvePath("src/objTool.js"),
   strTool: resolvePath("src/strTool.js"),
-  variables: resolvePath("src/variables.js")
+  variables: resolvePath("src/variables.js"),
+  functional: resolvePath("src/functional/index.js")
 }
 
 const esDest = {
@@ -28,7 +29,8 @@ const esDest = {
   fileTool: resolvePath("es/fileTool.js"),
   objTool: resolvePath("es/objTool.js"),
   strTool: resolvePath("es/strTool.js"),
-  variables: resolvePath("es/variables.js")
+  variables: resolvePath("es/variables.js"),
+  functional: resolvePath("es/functional.js")
 }
 
 const plugins = [
@@ -47,11 +49,21 @@ const plugins = [
 const external = function (name) {
   return (
     /crypto-js/.test(name) ||
-    /core-js/.test(name)
+    /core-js/.test(name) ||
+    (/src/.test(name)) && !(/observables/.test(name))
   )
 };
 
 export default [
+  {
+    input: src.index,
+    output: {
+      file: esDest.index,
+			format: "es"
+    },
+    plugins,
+    external
+  },
   {
     input: src.arrTool,
     output: {
@@ -119,6 +131,15 @@ export default [
     input: src.variables,
     output: {
       file: esDest.variables,
+			format: "es"
+    },
+    plugins,
+    external
+  },
+  {
+    input: src.functional,
+    output: {
+      file: esDest.functional,
 			format: "es"
     },
     plugins,

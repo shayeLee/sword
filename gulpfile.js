@@ -36,9 +36,9 @@ var rollupConfig = {
 };
 
 gulp.task("rollup-dev", function() {
-  rollupConfig.input = "./example.js";
+  rollupConfig.input = "./example/index.js";
   rollupConfig.watch = {
-    include: ["./example.js", "src/**/*.js"]
+    include: ["./example/**/*.js", "src/**/*.js"]
   }
   rollupConfig.output = [{
     file: "dist/example.js",

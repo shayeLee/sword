@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>strTool - Documentation</title>
+    <title>functional/observables/observable.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -31,256 +31,58 @@
 
 <div id="main">
     
-    <h1 class="page-title">strTool</h1>
+    <h1 class="page-title">functional/observables/observable.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2>
-        strTool
-        </h2>
-        
-    
-</header>
-
-<article>
-    
-        <div class="container-overview">
-        
-            
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="strTool.js.html">strTool.js</a>, <a href="strTool.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-            
-
-            
-        
-        </div>
-    
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id=".query2obj"><span class="type-signature">(static) </span>query2obj<span class="signature">(query)</span><span class="type-signature"> &rarr; {object}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="strTool.js.html">strTool.js</a>, <a href="strTool.js.html#line7">line 7</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>把URL查询参数转换为object</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>query</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>url问号后面的查询参数  e.g. ?id=66597&amp;type=2&amp;stuNum=1</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-        
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @class Observable
+ */
+
+import { isCorrect } from "../../variables";
+
+class Observable {
+  constructor(value) {
+    this.value = value;
+  }
+
+  /**
+   * 根据入参函数创建一个新的函子
+   * @param {function} f - 处理函子值的函数
+   * @returns {functor} 返回一个新的函子
+   */
+  map(f) {
+    return isCorrect(this.value) ? new Observable(f(this.value)) : new Observable(null);
+  }
+
+  /**
+   * 函子是否有正确的值
+   * @returns {boolean}
+   */
+  isNothing() {
+    return !isCorrect(this.value);
+  }
+}
+
+/**
+ * 创建函子
+ * @param {*} value - 函子的值
+ * @returns {functor}
+ */
+Observable.of = function(value) {
+  return new Observable(value);
+};
+
+export default Observable;
+</code></pre>
+        </article>
+    </section>
 
 
 

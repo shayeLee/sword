@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>objTool.js - Documentation</title>
+    <title>animate.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -31,7 +31,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">objTool.js</h1>
+    <h1 class="page-title">animate.js</h1>
     
 
     
@@ -42,33 +42,29 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @namespace objTool
+ * @namespace animate
  */
-
-import { isCorrect } from "./variables";
 
 /**
- * 将object转换为URL查询参数
- * @memberOf objTool
- * @function obj2query
- * @param {object} obj - 要转换为查询参数的object
- * @returns {string} - URL查询参数
- */
-function obj2query(obj) {
-  if (!isCorrect(obj)) return "";
-
-  let query = "";
-  for (const key in obj) {
-    if (query === "") {
-      query += `${key}=${obj[key]}`;
-    } else {
-      query += `&amp;${key}=${obj[key]}`;
-    }
-  }
-
-  return `?${query}`;
+ * js动画引擎
+ * @memberof animate
+ * @param {function} cb - 逐帧回掉函数
+*/
+function rAF(cb) {
+  var rAF =
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    function(cb) {
+      window.setTimeout(cb, 1000 / 60);
+    };
+  return rAF(cb);
 }
-export { obj2query }</code></pre>
+
+export { rAF }
+</code></pre>
         </article>
     </section>
 

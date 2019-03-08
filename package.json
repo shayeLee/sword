@@ -1,8 +1,9 @@
 {
   "name": "shaye-sword",
-  "version": "1.0.5",
+  "version": "1.0.12",
   "description": "a javascript tool library",
   "module": "es/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "rollup -c ./build/rollup.config.js",
     "doc": "jsdoc -c ./jsdoc.config.json"

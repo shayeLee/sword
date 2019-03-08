@@ -1,27 +1,27 @@
 {
-	"tags": {
-		"allowUnknownTags": true,
-		"dictionaries": ["jsdoc", "closure"]
-	},
-	"source": {
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "source": {
     "include": ["./src"],
-		"exclude": ["src/index.js"]
-	},
-	"plugins": ["plugins/markdown"],
-	"markdown": {
-		"tags": [],
-		"excludeTags": [],
-		"hardwrap": true
-	},
-	"templates": {
-		"cleverLinks": false,
-		"monospaceLinks": false
-	},
-	"opts": {
-		"encoding": "utf8",
-		"template": "node_modules/docdash",
-		"destination": "./docs/",
-		"recurse": true,
-		"readme": "README.md"
-	}
+    "exclude": ["src/index.js"]
+  },
+  "plugins": ["plugins/markdown"],
+  "markdown": {
+    "tags": [],
+    "excludeTags": [],
+    "hardwrap": true
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  },
+  "opts": {
+    "encoding": "utf8",
+    "template": "node_modules/docdash",
+    "destination": "./docs/",
+    "recurse": true,
+    "readme": "README.md"
+  }
 }

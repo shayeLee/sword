@@ -130,4 +130,24 @@ function str2time(strTime) {
     return new Date(year, month - 1, day, hour, minutes, seconds);
   }
 }
-export { time2str, str2time }
+
+/**
+ * 获取当前周的每天的日期（共七天）
+ * @memberof dateTool
+*/
+function getCurrWeekDates() {
+  const timeOfToday = Date.now();
+  const weekOfToday = (new Date().getDay() + 7 - 1) % 7;
+  return Array.from(new Array(7)).map((_, i) => {
+    const date = new Date(timeOfToday + (i - weekOfToday) * 1000 * 60 * 60 * 24);
+    return (
+      date.getFullYear() +
+      "-" +
+      String(date.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(date.getDate()).padStart(2, "0")
+    );
+  });
+}
+
+export { time2str, str2time, getCurrWeekDates };

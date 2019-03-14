@@ -1,1 +1,1 @@
-import "./compose.js";
+import "./getCurrWeekDates";

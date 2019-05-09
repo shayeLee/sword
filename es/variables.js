@@ -1,5 +1,3 @@
-import 'core-js/modules/es6.regexp.to-string';
-
 /**
  * @namespace variables
  */

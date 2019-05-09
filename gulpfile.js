@@ -8,18 +8,6 @@ var gulp = require("gulp"),
 	commonJs = require("rollup-plugin-commonjs"),
 	replace = require("rollup-plugin-replace");
 
-var src = {
-	main: "src/index.js"
-};
-
-var dest = {
-	main: "dist/sword.js"
-};
-
-var watch = {
-	modules: []
-};
-
 var rollupConfig = {
 	plugins: [
     babel({

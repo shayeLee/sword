@@ -3,11 +3,13 @@
     [
       "@babel/preset-env",
       {
-        "useBuiltIns": "usage",
-        "modules": false,
-        "shippedProposals": true
+        "modules": false
       }
     ]
   ],
-  "plugins": ["@babel/plugin-proposal-export-default-from"]
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-external-helpers",
+    "@babel/plugin-proposal-export-default-from"
+  ]
 }

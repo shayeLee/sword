@@ -27,4 +27,9 @@ function query2obj(query) {
 
   return queryMap;
 }
-export { query2obj }
+
+function lowercase2capitalize(string) {
+  return string.slice(0, 1).toUpperCase() + string.slice(1);
+}
+
+export { query2obj, lowercase2capitalize }

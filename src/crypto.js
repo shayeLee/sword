@@ -27,7 +27,7 @@ function randomCode(length) {
   return code;
 }
 
-function _generateOSSKey(name) {
+function generateOSSKey(name) {
   const time = new Date();
   const rootPath = `live/tms/${time.getFullYear()}/${time.getMonth() +
     1}/${time.getDate()}/`;
@@ -54,11 +54,11 @@ function generateUploadParams(file, id, secret) {
   );
 
   return {
-    key: _generateOSSKey(file.name),
+    key: generateOSSKey(file.name),
     OSSAccessKeyId: id,
     policy,
     Signature: base64.stringify(hmacSHA1(policy, secret)),
     success_action_status: "200"
   };
 }
-export { randomCode, generateUploadParams }
+export { randomCode, generateUploadParams, generateOSSKey }

@@ -1,7 +1,8 @@
-import 'core-js/modules/web.dom.iterable';
-import 'core-js/modules/es6.regexp.split';
 import { isCorrect } from './variables.js';
 
+/**
+ * @namespace strTool
+ */
 /**
  * 把URL查询参数转换为object
  * @memberOf strTool
@@ -24,4 +25,8 @@ function query2obj(query) {
   return queryMap;
 }
 
-export { query2obj };
+function lowercase2capitalize(string) {
+  return string.slice(0, 1).toUpperCase() + string.slice(1);
+}
+
+export { query2obj, lowercase2capitalize };

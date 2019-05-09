@@ -1,9 +1,3 @@
-import 'core-js/modules/es7.string.pad-start';
-import 'core-js/modules/es6.string.iterator';
-import 'core-js/modules/es6.array.from';
-import 'core-js/modules/es6.regexp.split';
-import 'core-js/modules/es6.regexp.to-string';
-
 /**
  * @namespace dateTool
  */

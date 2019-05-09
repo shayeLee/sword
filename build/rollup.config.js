@@ -5,6 +5,8 @@ import { uglify } from "rollup-plugin-uglify";
 
 const plugins = [
   babel({
+    runtimeHelpers: true,
+    externalHelpers: true,
     exclude: "node_modules/**"
   }),
   nodeResolve({

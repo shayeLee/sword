@@ -1,6 +1,6 @@
 {
   "name": "shaye-sword",
-  "version": "1.0.14",
+  "version": "1.0.16",
   "description": "a javascript tool library",
   "module": "es/index.js",
   "main": "dist/sword.js",
@@ -24,13 +24,14 @@
     "IE 11"
   ],
   "dependencies": {
-    "@babel/polyfill": "^7.0.0",
-    "crypto-js": "^3.1.9-1",
-    "docdash": "^1.0.2"
+    "@babel/runtime": "^7.4.4",
+    "crypto-js": "^3.1.9-1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
+    "@babel/plugin-external-helpers": "^7.2.0",
     "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.1.6",
     "del": "^3.0.0",
     "gulp": "^3.9.1",

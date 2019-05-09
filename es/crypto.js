@@ -1,9 +1,11 @@
-import 'core-js/modules/es6.function.name';
 import base64 from 'crypto-js/enc-base64';
 import md5 from 'crypto-js/md5';
 import utf8 from 'crypto-js/enc-utf8';
 import hmacSHA1 from 'crypto-js/hmac-sha1';
 
+/**
+ * @namespace crypto
+ */
 /**
  * 生成指定长度的随机码
  * @memberof crypto
@@ -26,7 +28,7 @@ function randomCode(length) {
   return code;
 }
 
-function _generateOSSKey(name) {
+function generateOSSKey(name) {
   var time = new Date();
   var rootPath = "live/tms/".concat(time.getFullYear(), "/").concat(time.getMonth() + 1, "/").concat(time.getDate(), "/");
   return "".concat(rootPath).concat(md5(name), "-").concat(name);
@@ -48,7 +50,7 @@ function generateUploadParams(file, id, secret) {
     conditions: [["content-length-range", 0, 41943040]]
   })));
   return {
-    key: _generateOSSKey(file.name),
+    key: generateOSSKey(file.name),
     OSSAccessKeyId: id,
     policy: policy,
     Signature: base64.stringify(hmacSHA1(policy, secret)),
@@ -56,4 +58,4 @@ function generateUploadParams(file, id, secret) {
   };
 }
 
-export { randomCode, generateUploadParams };
+export { randomCode, generateUploadParams, generateOSSKey };

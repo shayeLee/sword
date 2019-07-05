@@ -8,31 +8,32 @@
   /**
    * @namespace dateTool
    */
-  /**
-   * 获取当前周的每天的日期（共七天）
-   * @memberof dateTool
-  */
-
-
-  function getCurrWeekDates() {
-    var timeOfToday = Date.now();
-    var weekOfToday = (new Date().getDay() + 7 - 1) % 7;
-    return Array.from(new Array(7)).map(function (_, i) {
-      var date = new Date(timeOfToday + (i - weekOfToday) * 1000 * 60 * 60 * 24);
-      return date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0") + "-" + String(date.getDate()).padStart(2, "0");
-    });
-  }
-
-  /**
-   * @namespace domTool
-   */
-
-  /**
-   * @namespace fileTool
-   */
 
   /**
    * @namespace variables
+   */
+
+  /**
+   * 获取document尺寸（不包含滚动条）
+   * @memberof domTool
+   * @param {string} [prop=null] - 指定属性 width 或者 height
+   */
+
+
+  function getDocumentSize() {
+    var prop = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var width = document.documentElement.clientWidth || document.body.clientWidth;
+    var height = document.documentElement.clientHeight || document.body.clientHeight;
+    var sizeObj = {
+      width: width,
+      height: height
+    };
+    if (prop === 'width' || prop === 'height') return sizeObj[prop];
+    return sizeObj;
+  }
+
+  /**
+   * @namespace fileTool
    */
 
   /**
@@ -51,7 +52,8 @@
    * @namespace functional
    */
 
-  console.log(getCurrWeekDates());
+  console.log('获取尺寸对象：', getDocumentSize());
+  console.log('只获取宽度：', getDocumentSize('width'));
 
 }());
 //# sourceMappingURL=example.js.map

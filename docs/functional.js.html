@@ -13,6 +13,7 @@
     <![endif]-->
     <link type="text/css" rel="stylesheet" href="styles/prettify.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -26,7 +27,7 @@
 
 <nav >
     
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="functional.Maybe.html">Maybe</a></li></ul><h3>Namespaces</h3><ul><li><a href="arrTool.html">arrTool</a><ul class='methods'><li data-type='method'><a href="arrTool.html#.enumFlagsThrustReverser">enumFlagsThrustReverser</a></li></ul></li><li><a href="crypto.html">crypto</a><ul class='methods'><li data-type='method'><a href="crypto.html#.generateUploadParams">generateUploadParams</a></li><li data-type='method'><a href="crypto.html#.randomCode">randomCode</a></li></ul></li><li><a href="dateTool.html">dateTool</a><ul class='methods'><li data-type='method'><a href="dateTool.html#.str2time">str2time</a></li><li data-type='method'><a href="dateTool.html#.time2str">time2str</a></li></ul></li><li><a href="domTool.html">domTool</a><ul class='methods'><li data-type='method'><a href="domTool.html#.getElementLeft">getElementLeft</a></li><li data-type='method'><a href="domTool.html#.getElementTop">getElementTop</a></li></ul></li><li><a href="fileTool.html">fileTool</a><ul class='methods'><li data-type='method'><a href="fileTool.html#.getImgBase64">getImgBase64</a></li></ul></li><li><a href="functional.html">functional</a><ul class='methods'><li data-type='method'><a href="functional.html#.compose">compose</a></li><li data-type='method'><a href="functional.html#.curry">curry</a></li><li data-type='method'><a href="functional.html#.map">map</a></li><li data-type='method'><a href="functional.html#.maybe">maybe</a></li></ul></li><li><a href="objTool.html">objTool</a><ul class='methods'><li data-type='method'><a href="objTool.html#.obj2query">obj2query</a></li></ul></li><li><a href="strTool.html">strTool</a><ul class='methods'><li data-type='method'><a href="strTool.html#.query2obj">query2obj</a></li></ul></li><li><a href="variables.html">variables</a><ul class='methods'><li data-type='method'><a href="variables.html#.cloneDeep">cloneDeep</a></li><li data-type='method'><a href="variables.html#.isCorrect">isCorrect</a></li><li data-type='method'><a href="variables.html#.isEmptyObject">isEmptyObject</a></li><li data-type='method'><a href="variables.html#.isObject">isObject</a></li><li data-type='method'><a href="variables.html#.isPromise">isPromise</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="animate.html">animate</a><ul class='methods'><li data-type='method'><a href="animate.html#.rAF">rAF</a></li></ul></li><li><a href="arrTool.html">arrTool</a><ul class='methods'><li data-type='method'><a href="arrTool.html#.enumFlagsThrustReverser">enumFlagsThrustReverser</a></li></ul></li><li><a href="crypto.html">crypto</a><ul class='methods'><li data-type='method'><a href="crypto.html#.generateUploadParams">generateUploadParams</a></li><li data-type='method'><a href="crypto.html#.randomCode">randomCode</a></li></ul></li><li><a href="dateTool.html">dateTool</a><ul class='methods'><li data-type='method'><a href="dateTool.html#.getCurrWeekDates">getCurrWeekDates</a></li><li data-type='method'><a href="dateTool.html#.str2time">str2time</a></li><li data-type='method'><a href="dateTool.html#.time2str">time2str</a></li></ul></li><li><a href="domTool.html">domTool</a><ul class='methods'><li data-type='method'><a href="domTool.html#.getElementLeft">getElementLeft</a></li><li data-type='method'><a href="domTool.html#.getElementTop">getElementTop</a></li></ul></li><li><a href="fileTool.html">fileTool</a><ul class='methods'><li data-type='method'><a href="fileTool.html#.getImgBase64">getImgBase64</a></li></ul></li><li><a href="functional.html">functional</a><ul class='methods'><li data-type='method'><a href="functional.html#.debounce">debounce</a></li><li data-type='method'><a href="functional.html#.throttle">throttle</a></li></ul></li><li><a href="objTool.html">objTool</a><ul class='methods'><li data-type='method'><a href="objTool.html#.obj2query">obj2query</a></li></ul></li><li><a href="strTool.html">strTool</a><ul class='methods'><li data-type='method'><a href="strTool.html#.query2obj">query2obj</a></li></ul></li><li><a href="variables.html">variables</a><ul class='methods'><li data-type='method'><a href="variables.html#.cloneDeep">cloneDeep</a></li><li data-type='method'><a href="variables.html#.isCorrect">isCorrect</a></li><li data-type='method'><a href="variables.html#.isEmptyObject">isEmptyObject</a></li><li data-type='method'><a href="variables.html#.isObject">isObject</a></li><li data-type='method'><a href="variables.html#.isPromise">isPromise</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -45,128 +46,55 @@
  * @namespace functional
  */
 
-import { isCorrect } from "./variables";
-
 /**
- * 将多个函数组合成一个新的函数
+ * 函数防抖
  * @memberof functional
- * @param {function} functions - 要合成的函数，多个函数用逗号分割（至少两个）
- * e.g. const composeFunction = compose(fn1, fn2, fn3);
- * @returns {function} composeFunction
+ * @param {function} func
+ * @param {number} delay
+ * @returns {function}
  */
-function compose() {
-  if (arguments.length &lt; 2) {
-    throw new RangeError("You can't have less than two functions");
-  }
-
-  const _arguments = arguments;
-  return function(x) {
-    let currValue = x;
-    const fnArr = _arguments;
-    const len = _arguments.length;
-    let i = len - 1;
-    for (i; i > 0; i--) {
-      currValue = fnArr[i](currValue);
-    }
-    return fnArr[0](currValue);
-  };
-}
-
-/**
- * 函数柯里化
- * @memberof functional
- * @param {function} fn - 要被柯里化的函数
- * @returns {function} curriedFunction
-*/
-function curry(fn) {
-  var _argLen = fn.length;
-  function handle() {
-    var _args = [].slice.call(arguments);
-    function act() {
-      _args = _args.concat([].slice.call(arguments));
-      if (_args.length === _argLen) {
-        return fn.apply(null, _args);
-      }
-      return arguments.callee;
-    }
-    if (_args.length === _argLen) {
-      return fn.apply(null, _args);
-    }
-
-    act.toString = function() {
-      return fn.toString();
+function debounce(func, delay) {
+    let timeout;
+    return function(e) {
+        clearTimeout(timeout);
+        let context = this,
+            args = arguments;
+        timeout = setTimeout(function() {
+            func.apply(context, args);
+        }, delay);
     };
-    return act;
-  }
-
-  return handle;
 }
 
 /**
- * 将原本的函子转变成新函子
- * 柯里化 map :: f(a -> b) -> Functor m
+ * 函数节流
  * @memberof functional
- * @method map
- * @param {function} f - 加工函子value的函数
- * @param {functor} m - 原本的函子
- * @returns {functor}
-*/
-const map = curry(function(f, m) {
-  return m.map(f);
-});
-
-/**
- * 取出函子里的值
- * 柯里化 maybe :: b -> f(a -> b) -> Functor m -> b
- * @memberof functional
- * @method maybe
- * @param {*} x - 如果函子没有正确的值就会提供的默认值
- * @param {function} f - 取出函子里的数据的函数
- * @param {functor} m - 函子
-*/
-const maybe = curry(function(x, f, m) {
-  return m.isNothing() ? x : f(m.value);
-});
-
-/**
- * maybe函子
- * @memberof functional
- * @class Maybe
+ * @param {function} func
+ * @param {number} threshold
+ * @returns {function}
  */
-class Maybe {
-  constructor(value) {
-    this.value = value;
-  }
+function throttle(func, threshold) {
+    let timeout;
+    let start = new Date();
+    let _threshold = threshold || 160;
+    return function() {
+        let context = this,
+            args = arguments,
+            curr = new Date() - 0;
 
-  /**
-   * 根据入参函数创建一个新的函子
-   * @param {function} f - 处理函子值的函数
-   * @returns {functor} 返回一个新的函子
-  */
-  map(f) {
-    return isCorrect(this.value) ? new Maybe(f(this.value)) : new Maybe(null);
-  }
-
-  /**
-   * 函子是否有正确的值
-   * @returns {boolean}
-  */
-  isNothing() {
-    return !isCorrect(this.value);
-  }
+        clearTimeout(timeout);
+        if (curr - start >= _threshold) {
+            func.apply(context, args);
+            start = curr;
+        } else {
+            //让方法在脱离事件后也能执行一次
+            timeout = setTimeout(function() {
+                func.apply(context, args);
+            }, _threshold);
+        }
+    };
 }
 
-/**
- * 创建函子
- * @param {*} value - 函子的值
- * @returns {functor}
-*/
-Maybe.of = function(value) {
-  return new Maybe(value);
-};
-
-export { compose, curry, map, maybe, Maybe };
-</code></pre>
+export { debounce, throttle }</code></pre>
         </article>
     </section>
 
@@ -180,11 +108,13 @@ export { compose, curry, map, maybe, Maybe };
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Jan 16 2019 17:45:50 GMT+0800 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Fri Jul 05 2019 09:16:38 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
 <script src="scripts/linenumber.js"></script>
+
 
 
 </body>

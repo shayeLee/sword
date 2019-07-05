@@ -6,6 +6,7 @@
   "main": "dist/sword.js",
   "scripts": {
     "build": "rollup -c ./build/rollup.config.js",
+    "dev": "gulp dev",
     "doc": "jsdoc -c ./jsdoc.config.json"
   },
   "keywords": [
@@ -25,7 +26,8 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.4.4",
-    "crypto-js": "^3.1.9-1"
+    "crypto-js": "^3.1.9-1",
+    "jsdoc": "^3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
@@ -34,7 +36,8 @@
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.1.6",
     "del": "^3.0.0",
-    "gulp": "^3.9.1",
+    "docdash": "^1.1.1",
+    "gulp": "3.9.1",
     "gulp-sequence": "^1.0.0",
     "rollup": "^0.67.3",
     "rollup-plugin-babel": "^4.0.3",

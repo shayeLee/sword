@@ -1,1 +1,1 @@
-import "./getDocumentSize";
+import "./getWindowSize";

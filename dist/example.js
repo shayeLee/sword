@@ -9,21 +9,18 @@
    * @namespace dateTool
    */
 
+  // import { isCorrect } from "./variables";
   /**
-   * @namespace variables
-   */
-
-  /**
-   * 获取document尺寸（不包含滚动条）
+   * 获取浏览器窗口尺寸（不包含滚动条）
    * @memberof domTool
    * @param {string} [prop=null] - 指定属性 width 或者 height
    */
 
 
-  function getDocumentSize() {
+  function getWindowSize() {
     var prop = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-    var width = document.documentElement.clientWidth || document.body.clientWidth;
-    var height = document.documentElement.clientHeight || document.body.clientHeight;
+    var width = document.documentElement.clientWidth || window.innerWidth;
+    var height = document.documentElement.clientHeight || window.innerHeight;
     var sizeObj = {
       width: width,
       height: height
@@ -34,6 +31,10 @@
 
   /**
    * @namespace fileTool
+   */
+
+  /**
+   * @namespace variables
    */
 
   /**
@@ -52,8 +53,11 @@
    * @namespace functional
    */
 
-  console.log('获取尺寸对象：', getDocumentSize());
-  console.log('只获取宽度：', getDocumentSize('width'));
+  window.addEventListener('load', function () {
+    console.log('获取窗口尺寸：', getWindowSize());
+    console.log('获取窗口宽度：', getWindowSize('width'));
+    console.log('获取窗口高度：', getWindowSize('height'));
+  });
 
 }());
 //# sourceMappingURL=example.js.map

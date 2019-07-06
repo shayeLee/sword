@@ -1,4 +1,4 @@
-import { isCorrect } from "./variables";
+// import { isCorrect } from "./variables";
 
 /**
  * @namespace domTool
@@ -13,16 +13,16 @@ import { isCorrect } from "./variables";
  * @returns {number} elementTop
  */
 function getElementTop(element, target) {
-    let actualTop = element.offsetTop;
-    let current = element.offsetParent;
-    const _target = target ? target : document.documentElement;
+  let actualTop = element.offsetTop;
+  let current = element.offsetParent;
+  const _target = target ? target : document.documentElement;
 
-    while (!(current === null || current === _target)) {
-        actualTop += current.offsetTop;
-        current = current.offsetParent;
-    }
+  while (!(current === null || current === _target)) {
+    actualTop += current.offsetTop;
+    current = current.offsetParent;
+  }
 
-    return actualTop;
+  return actualTop;
 }
 
 /**
@@ -34,32 +34,53 @@ function getElementTop(element, target) {
  * @returns {number} elementLeft
  */
 function getElementLeft(element, target) {
-    let actualLeft = element.offsetLeft;
-    let current = element.offsetParent;
-    const _target = target ? target : document.documentElement;
+  let actualLeft = element.offsetLeft;
+  let current = element.offsetParent;
+  const _target = target ? target : document.documentElement;
 
-    while (!(current === null || current === _target)) {
-        actualLeft += current.offsetLeft;
-        current = current.offsetParent;
-    }
+  while (!(current === null || current === _target)) {
+    actualLeft += current.offsetLeft;
+    current = current.offsetParent;
+  }
 
-    return actualLeft;
+  return actualLeft;
 }
 
 /**
- * 获取document尺寸（不包含滚动条）
+ * 获取PC浏览器滚动条宽度
+ * @memberof domTool
+ */
+function getScrollBarWidth() {
+  const testElement = document.createElement('div');
+  testElement.style.visibility = 'hidden';
+  testElement.style.position = 'fixed';
+  testElement.style.top = '0';
+  testElement.style.left = '0';
+  testElement.style.zIndex = '-1';
+  testElement.style.width = '50px';
+  testElement.style.height = '50px';
+  testElement.style.overflowY = 'auto';
+  testElement.innerHTML = '<div id="test-scroll-bar-body" style="height: 100px;"></div>';
+  document.body.appendChild(testElement);
+  const innerWidth = document.getElementById('test-scroll-bar-body').clientWidth;
+  document.body.removeChild(testElement);
+  return 50 - innerWidth;
+}
+
+/**
+ * 获取浏览器窗口尺寸（不包含滚动条）
  * @memberof domTool
  * @param {string} [prop=null] - 指定属性 width 或者 height
  */
-function getDocumentSize(prop = null) {
-    const width = document.documentElement.clientWidth || document.body.clientWidth;
-    const height = document.documentElement.clientHeight || document.body.clientHeight;
-    const sizeObj = { width, height };
-    if (
-      prop === 'width' ||
-      prop === 'height'
-    ) return sizeObj[prop];
-    return sizeObj; 
+function getWindowSize(prop = null) {
+  const width = document.documentElement.clientWidth || window.innerWidth;
+  const height = document.documentElement.clientHeight || window.innerHeight;
+  const sizeObj = { width, height };
+  if (
+    prop === 'width' ||
+    prop === 'height'
+  ) return sizeObj[prop];
+  return sizeObj;
 }
 
-export { getElementTop, getElementLeft, getDocumentSize };
+export { getElementTop, getElementLeft, getWindowSize, getScrollBarWidth };

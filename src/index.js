@@ -4,6 +4,8 @@ export * from "./dateTool";
 
 export * from "./domTool";
 
+export { default as browserNavigator } from "./browserDetect";
+
 export * from "./fileTool";
 
 export * from "./objTool";

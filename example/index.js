@@ -1,1 +1,1 @@
-import "./getWindowSize";
+import "./browserNavigator";

@@ -11,6 +11,7 @@ var gulp = require("gulp"),
 var rollupConfig = {
 	plugins: [
     babel({
+			runtimeHelpers: true,
 			exclude: "node_modules/**"
 		}),
 		nodeResolve({

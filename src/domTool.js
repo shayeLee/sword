@@ -71,10 +71,11 @@ function getScrollBarWidth() {
  * 获取浏览器窗口尺寸（不包含滚动条）
  * @memberof domTool
  * @param {string} [prop=null] - 指定属性 width 或者 height
+ * @param {element} [element] - 代替documentElement的element
  */
-function getWindowSize(prop = null) {
-  const width = document.documentElement.clientWidth || window.innerWidth;
-  const height = document.documentElement.clientHeight || window.innerHeight;
+function getWindowSize(prop = null, element) {
+  const width = document.documentElement.clientWidth || element.clientWidth;
+  const height = document.documentElement.clientHeight || element.innerHeight;
   const sizeObj = { width, height };
   if (
     prop === 'width' ||
